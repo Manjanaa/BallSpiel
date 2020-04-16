@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace BallSpiel
@@ -15,15 +16,20 @@ namespace BallSpiel
         private bool ellBallDriftingRight = true;
         private bool ellBallDriftingDown = true;
         private int zaehler = 0;
-
-        public MainWindow()
+        private int ballfarbe = 1;
+        private void ProgrammStartStop()
         {
-            InitializeComponent();
-
-            _animationsTimer.Interval = TimeSpan.FromMilliseconds(50);
-            _animationsTimer.Tick += positioningellBall;
+            if (_animationsTimer.IsEnabled)
+            {
+                _animationsTimer.Stop();
+            }
+            else
+            {
+                _animationsTimer.Start();
+                zaehler = 0;
+                lblScore.Content = $"HITS {zaehler}";
+            }
         }
-
         private void positioningellBall(object sender, EventArgs e)
         {
             var x = Canvas.GetLeft(ellBall);
@@ -66,6 +72,29 @@ namespace BallSpiel
                 ellBallDriftingDown = true;
             }
         }
+        
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            _animationsTimer.Interval = TimeSpan.FromMilliseconds(50);
+            _animationsTimer.Tick += positioningellBall;
+        }
+
+        private void mnu_StartStop_Click(object sender, RoutedEventArgs e)
+        {
+            ProgrammStartStop();
+        }
+
+        private void mnu_Hits_anzeigen_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(lblScore.Content.ToString(), "HITS");
+        }
+
+        private void mnuBeenden_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
         private void btnStartStop_Click(object sender, RoutedEventArgs e)
         {
@@ -86,38 +115,49 @@ namespace BallSpiel
             }
         }
 
-        private void mnu_StartStop_Click(object sender, RoutedEventArgs e)
+        private void BallSpiel_KeyUp(object sender, KeyEventArgs e)
         {
-            ProgrammStartStop();
-        }
-
-        private void mnu_Hits_anzeigen_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(lblScore.Content.ToString(), "HITS");
-        }
-
-        private void mnuBeenden_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void Window_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            ProgrammStartStop();
-        }
-
-        private void ProgrammStartStop()
-        {
-            if (_animationsTimer.IsEnabled)
+            // RUN - Change Ball Color
+            switch (e.Key)
             {
-                _animationsTimer.Stop();
+                case Key.PageUp:
+                    if (ballfarbe < 4)
+                    {
+                        ballfarbe = ballfarbe + 1;
+                    }
+                    else
+                    {
+                        ballfarbe = 1;
+                    }
+                    break;
+                case Key.PageDown:
+                    if (ballfarbe > 1)
+                    {
+                        ballfarbe = ballfarbe - 1;
+                    }
+                    else
+                    {
+                        ballfarbe = 3;
+                    }
+                    break;
+                default:
+                    break;
             }
-            else
+            switch (ballfarbe)
             {
-                _animationsTimer.Start();
-                zaehler = 0;
-                lblScore.Content = $"HITS {zaehler}";
+                case 1:
+                    ellBall.Fill = Brushes.Blue;
+                    break;
+                case 2:
+                    ellBall.Fill = Brushes.Green;
+                    break;
+                case 3:
+                    ellBall.Fill = Brushes.Red;
+                    break;
+                default:
+                    break;
             }
+            // END - Change Ball Color
         }
     }
 }

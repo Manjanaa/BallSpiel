@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BallSpiel"
         mc:Ignorable="d"
-        Title="Ein buntes Ball Spiel für Moni Mausi)" Height="450" Width="800" MouseRightButtonUp="Window_MouseRightButtonUp">
+        Title="Ein buntes Ball Spiel für Moni Mausi :)" Height="450" Width="800" KeyUp="BallSpiel_KeyUp">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Datei">
@@ -22,11 +22,11 @@
                     <GradientStop Color="#FFEB5555" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
-            <Label Name="lblScore" Content="HITS: 0" Margin="0,0,0,0" Height="50" Width="140" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="LeftToRight" FontFamily="Tahoma" FontSize="16" FontStretch="Normal" FontStyle="Normal" FontWeight="Bold" BorderThickness="3,3,3,3" BorderBrush="#FF969664" Background="#FFEB5555" Foreground="#FFF0F0F0"/>
-            <Button Name="btnStartStop" Content="START / STOP" Margin="0,0,0,33" Height="35" Width="140" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Tahoma" FontWeight="Bold" BorderThickness="3,3,3,3" BorderBrush="#FF969664" Background="#FF84E261" Click="btnStartStop_Click"/>
-            <Button Name="btnExit" Content="EXIT" Margin="0,0,0,0" Height="35" Width="140" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Tahoma" FontWeight="Bold" FontStretch="Normal" BorderThickness="3,3,3,3" BorderBrush="#FF969664" Background="#FF84E261" Click="btnExit_Click"/>
+            <Label Name="lblScore" Content="TREFFER: 0" Margin="0,0,0,0" Height="50" Width="140" HorizontalAlignment="Left" VerticalAlignment="Top" FlowDirection="LeftToRight" FontFamily="Tahoma" FontSize="16" FontStretch="Normal" FontStyle="Normal" FontWeight="Bold" BorderThickness="3,3,3,3" BorderBrush="#FF969664" Background="#FFEB5555" Foreground="#FFF0F0F0"/>
+            <Button Name="btnStartStop" Content="START - STOP" Margin="0,70,0,0" Height="40" Width="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" BorderThickness="3,3,3,3" BorderBrush="#FF969664" Background="#FF84E261" Click="btnStartStop_Click"/>
+            <Button Name="btnExit" Content="SPIEL BEENDEN" Margin="0,120,0,0" Height="40" Width="140" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Tahoma" FontWeight="Bold" FontStretch="Normal" BorderThickness="3,3,3,3" BorderBrush="#FF969664" Background="#FF84E261" Click="btnExit_Click"/>
             <Canvas Name="canMatchfield" Margin="140,0,0,0" Background="#FFF0F064">
-                <Ellipse x:Name="ellBall" Canvas.Left="50" Canvas.Top="50" Height="20" Width="20" Fill="#00A8C6" MouseUp="ellBall_MouseUp"/>
+                <Ellipse x:Name="ellBall" Canvas.Left="50" Canvas.Top="50" Height="20" Width="20" Fill="DarkCyan"  MouseUp="ellBall_MouseUp"/>
             </Canvas>
         </Grid>
     </DockPanel>
