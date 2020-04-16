@@ -12,13 +12,16 @@ namespace BallSpiel
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Initialize Variables
         private readonly DispatcherTimer _animationsTimer = new DispatcherTimer();
         private bool ellBallDriftingRight = true;
         private bool ellBallDriftingDown = true;
         private int zaehler = 0;
-        private int ballfarbe = 1;
+        private int ellBallColor = 1;
+
         private void ProgrammStartStop()
         {
+            // Start or Stop the Game; depending on actual state
             if (_animationsTimer.IsEnabled)
             {
                 _animationsTimer.Stop();
@@ -27,15 +30,17 @@ namespace BallSpiel
             {
                 _animationsTimer.Start();
                 zaehler = 0;
-                lblScore.Content = $"HITS {zaehler}";
+                lblScore.Content = $"TREFFER: {zaehler}";
             }
         }
+
         private void positioningellBall(object sender, EventArgs e)
         {
+            // Movement Routines for the ball
             var x = Canvas.GetLeft(ellBall);
             var y = Canvas.GetTop(ellBall);
 
-            // Horizontal Movement
+            // Horizontal Axis Movement
             if (ellBallDriftingRight)
             {
                 Canvas.SetLeft(ellBall, x + 5);
@@ -53,8 +58,7 @@ namespace BallSpiel
             {
                 ellBallDriftingRight = true;
             }
-
-            // Vertical Movement
+            // Vertical Axis Movement
             if (ellBallDriftingDown)
             {
                 Canvas.SetTop(ellBall, y + 5);
@@ -75,75 +79,83 @@ namespace BallSpiel
         
         public MainWindow()
         {
+            // Initialize Main Window
             InitializeComponent();
 
+            // Initialize the animations timers for ball 
             _animationsTimer.Interval = TimeSpan.FromMilliseconds(50);
             _animationsTimer.Tick += positioningellBall;
         }
 
         private void mnu_StartStop_Click(object sender, RoutedEventArgs e)
         {
+            // Menu entry, start or stop the Game
             ProgrammStartStop();
         }
 
         private void mnu_Hits_anzeigen_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(lblScore.Content.ToString(), "HITS");
+            // Menu entry Hits, showing games score in a MessageBox
+            MessageBox.Show(lblScore.Content.ToString(), "TREFFER:");
         }
 
         private void mnuBeenden_Click(object sender, RoutedEventArgs e)
         {
+            // Menu entry, stopping the game
             Application.Current.Shutdown();
         }
 
         private void btnStartStop_Click(object sender, RoutedEventArgs e)
         {
+            // Button, start or stop the game
             ProgrammStartStop();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
+            // Button, stopping the game
             App.Current.Shutdown();
         }
 
         private void ellBall_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            // Check if the player hits the ball with a mouse click
             if (_animationsTimer.IsEnabled)
             {
                 zaehler += 1;
-                lblScore.Content = $"HITS {zaehler}";
+                lblScore.Content = $"TREFFER: {zaehler}";
             }
         }
 
         private void BallSpiel_KeyUp(object sender, KeyEventArgs e)
         {
-            // RUN - Change Ball Color
+            // START - Change ball color with page up/down keys
             switch (e.Key)
             {
                 case Key.PageUp:
-                    if (ballfarbe < 4)
+                    if (ellBallColor < 4)
                     {
-                        ballfarbe = ballfarbe + 1;
+                        ellBallColor = ellBallColor + 1;
                     }
                     else
                     {
-                        ballfarbe = 1;
+                        ellBallColor = 1;
                     }
                     break;
                 case Key.PageDown:
-                    if (ballfarbe > 1)
+                    if (ellBallColor > 1)
                     {
-                        ballfarbe = ballfarbe - 1;
+                        ellBallColor = ellBallColor - 1;
                     }
                     else
                     {
-                        ballfarbe = 3;
+                        ellBallColor = 3;
                     }
                     break;
                 default:
                     break;
             }
-            switch (ballfarbe)
+            switch (ellBallColor)
             {
                 case 1:
                     ellBall.Fill = Brushes.Blue;
@@ -157,7 +169,7 @@ namespace BallSpiel
                 default:
                     break;
             }
-            // END - Change Ball Color
+            // END - Change ball color with page up/down keys
         }
     }
 }
