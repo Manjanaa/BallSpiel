@@ -12,7 +12,7 @@ namespace BallSpiel
     /// </summary>
     public partial class MainWindow : Window
     {
-        // Initialize Variables
+        // Initializing the Variables.
         private readonly DispatcherTimer _animationsTimer = new DispatcherTimer();
         private bool ellBallDriftingRight = true;
         private bool ellBallDriftingDown = true;
@@ -21,7 +21,7 @@ namespace BallSpiel
 
         private void ProgrammStartStop()
         {
-            // Start or Stop the Game; depending on actual state
+            // Start or Stop the Game; depending on actual state.
             if (_animationsTimer.IsEnabled)
             {
                 _animationsTimer.Stop();
@@ -36,11 +36,11 @@ namespace BallSpiel
 
         private void positioningellBall(object sender, EventArgs e)
         {
-            // Movement Routines for the ball
+            // Movement Routines for the ball.
             var x = Canvas.GetLeft(ellBall);
             var y = Canvas.GetTop(ellBall);
 
-            // Horizontal Axis Movement
+            // Horizontal Axis Movement.
             if (ellBallDriftingRight)
             {
                 Canvas.SetLeft(ellBall, x + 5);
@@ -58,7 +58,7 @@ namespace BallSpiel
             {
                 ellBallDriftingRight = true;
             }
-            // Vertical Axis Movement
+            // Vertical Axis Movement.
             if (ellBallDriftingDown)
             {
                 Canvas.SetTop(ellBall, y + 5);
@@ -79,47 +79,47 @@ namespace BallSpiel
         
         public MainWindow()
         {
-            // Initialize Main Window
+            // Initializing the Main Window.
             InitializeComponent();
 
-            // Initialize the animations timers for ball 
+            // Initializing the animations timers for the balls moving.
             _animationsTimer.Interval = TimeSpan.FromMilliseconds(50);
             _animationsTimer.Tick += positioningellBall;
         }
 
         private void mnu_StartStop_Click(object sender, RoutedEventArgs e)
         {
-            // Menu entry, start or stop the Game
+            // Menu entry, start or stop the Game.
             ProgrammStartStop();
         }
 
         private void mnu_Hits_anzeigen_Click(object sender, RoutedEventArgs e)
         {
-            // Menu entry Hits, showing games score in a MessageBox
+            // Menu entry Hits, showing games score in a MessageBox.
             MessageBox.Show(lblScore.Content.ToString(), "TREFFER:");
         }
 
         private void mnuBeenden_Click(object sender, RoutedEventArgs e)
         {
-            // Menu entry, stopping the game
+            // Menu entry, stopping the game.
             Application.Current.Shutdown();
         }
 
         private void btnStartStop_Click(object sender, RoutedEventArgs e)
         {
-            // Button, start or stop the game
+            // Button, start or stop the game.
             ProgrammStartStop();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            // Button, stopping the game
+            // Button, exit the game.
             App.Current.Shutdown();
         }
 
         private void ellBall_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            // Check if the player hits the ball with a mouse click
+            // Check if the player hits the ball with a mouse click.
             if (_animationsTimer.IsEnabled)
             {
                 zaehler += 1;
@@ -129,7 +129,7 @@ namespace BallSpiel
 
         private void BallSpiel_KeyUp(object sender, KeyEventArgs e)
         {
-            // START - Change ball color with page up/down keys
+            // Change the ball color with page up/down keys.
             switch (e.Key)
             {
                 case Key.PageUp:
@@ -169,7 +169,7 @@ namespace BallSpiel
                 default:
                     break;
             }
-            // END - Change ball color with page up/down keys
         }
+
     }
 }

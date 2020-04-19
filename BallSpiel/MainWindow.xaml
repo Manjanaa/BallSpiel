@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BallSpiel"
         mc:Ignorable="d"
-        Title="Ein buntes Ball Spiel für Moni Mausi :)" Height="450" Width="800" KeyUp="BallSpiel_KeyUp">
+        Title="Ball Spiel" Height="450" Width="800" KeyUp="BallSpiel_KeyUp">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Datei">
